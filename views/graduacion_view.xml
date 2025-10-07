@@ -1,0 +1,198 @@
+<odoo>
+  <!-- FORM de optica.graduacion -->
+  <record id="view_graduacion_form" model="ir.ui.view">
+    <field name="name">optica.graduacion.form</field>
+    <field name="model">optica.graduacion</field>
+    <field name="arch" type="xml">
+      <form string="Graduación de Paciente">
+        <header>
+          <button name="action_imprimir_historia_clinica"
+                  string="Imprimir Historia Clínica" 
+                  type="object"
+                  class="mi-btn shadow-effect"/>
+        </header>
+       
+        <sheet>
+          <!-- Cabecera básica -->
+          <group>
+            <group>
+              <field name="paciente_id" class="graduacion-field"/>
+              <field name="fecha" class="graduacion-field"/>
+              <field name="diagnostico" class="graduacion-field"/>
+              <field name="tipo_lente" class="graduacion-field"/>
+              <field name="profesional" class="graduacion-field"/>
+            </group>
+          </group>
+         
+          <!-- Rx en dos columnas -->
+          <group col="2">
+            <group string="Ojo Derecho">
+              <field name="ojo_derecho_esfera" string="ESF" placeholder="0.00" class="graduacion-field"/>
+              <field name="ojo_derecho_cilindro" string="CIL" placeholder="0.00" class="graduacion-field"/>
+              <field name="ojo_derecho_eje" string="EJE" placeholder="0" class="graduacion-field"/>
+              <field name="ojo_derecho_av" string="AV" placeholder="20/20" class="graduacion-field"/>
+            </group>
+
+            <group string="Ojo Izquierdo">
+              <field name="ojo_izquierdo_esfera" string="ESF" placeholder="0.00" class="graduacion-field"/>
+              <field name="ojo_izquierdo_cilindro" string="CIL" placeholder="0.00" class="graduacion-field"/>
+              <field name="ojo_izquierdo_eje" string="EJE" placeholder="0" class="graduacion-field"/>
+              <field name="ojo_izquierdo_av" string="AV" placeholder="20/20" class="graduacion-field"/>
+            </group>
+          </group>
+          
+          <!-- Datos adicionales en 2 columnas -->
+          <group string="Datos adicionales" col="2">
+            <group>
+              <field name="adicion" string="ADD" placeholder="0.00" class="graduacion-field"/>
+              <field name="distancia_nasopupilar_od" string="DNP OD" placeholder="0.0" class="graduacion-field"/>
+            </group>
+            <group>
+              <field name="distancia_interpupilar" string="DIP" placeholder="0.0" class="graduacion-field"/>
+              <field name="distancia_nasopupilar_oi" string="DNP OI" placeholder="0.0" class="graduacion-field"/>
+            </group>
+          </group>
+
+          <!-- Otros -->
+          <group>
+            <field name="observaciones" colspan="2" class="graduacion-field"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  
+  <!-- El resto de tu XML se mantiene igual (Kanban, Tree, etc.) -->                                 
+
+<!-- Vista Kanban CORREGIDA - SIN BOTÓN -->
+<record id="view_graduacion_kanban" model="ir.ui.view">
+    <field name="name">optica.graduacion.kanban</field>
+    <field name="model">optica.graduacion</field>
+    <field name="arch" type="xml">
+        <kanban string="Graduaciones">
+            <!-- DECLARAR CAMPOS QUE SE USARÁN -->
+            <field name="paciente_id"/>
+            <field name="fecha"/>
+            <field name="ojo_derecho_esfera"/>
+            <field name="ojo_derecho_cilindro"/>
+            <field name="ojo_derecho_eje"/>
+            <field name="ojo_derecho_av"/>
+            <field name="ojo_izquierdo_esfera"/>
+            <field name="ojo_izquierdo_cilindro"/>
+            <field name="ojo_izquierdo_eje"/>
+            <field name="ojo_izquierdo_av"/>
+            <field name="diagnostico"/>
+            <field name="tipo_lente"/>
+            <field name="profesional"/>
+            
+            <templates>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_global_click kanban-flow-violento">
+                        <!-- HEADER -->
+                        <div class="kanban-header-flow">
+                            <div class="kanban-paciente">
+                                <strong t-esc="record.paciente_id.value or 'Sin paciente'"/>
+                            </div>
+                            <div class="kanban-fecha">
+                                <span t-esc="record.fecha.value or 'Sin fecha'"/>
+                            </div>
+                        </div>
+                        
+                        <!-- CUERPO -->
+                        <div class="kanban-body-flow">
+                            <!-- OJO DERECHO -->
+                            <div class="ojo-section ojo-derecho">
+                                <div class="ojo-title">👁️ OJO DERECHO</div>
+                                <div class="ojo-datos">
+                                    <div class="dato"><span>ESF:</span> <span t-esc="record.ojo_derecho_esfera.value or '--'"/></div>
+                                    <div class="dato"><span>CIL:</span> <span t-esc="record.ojo_derecho_cilindro.value or '--'"/></div>
+                                    <div class="dato"><span>EJE:</span> <span t-esc="record.ojo_derecho_eje.value or '--'"/></div>
+                                    <div class="dato"><span>AV:</span> <span t-esc="record.ojo_derecho_av.value or '--'"/></div>
+                                </div>
+                            </div>
+                            
+                            <!-- OJO IZQUIERDO -->
+                            <div class="ojo-section ojo-izquierdo">
+                                <div class="ojo-title">👁️ OJO IZQUIERDO</div>
+                                <div class="ojo-datos">
+                                    <div class="dato"><span>ESF:</span> <span t-esc="record.ojo_izquierdo_esfera.value or '--'"/></div>
+                                    <div class="dato"><span>CIL:</span> <span t-esc="record.ojo_izquierdo_cilindro.value or '--'"/></div>
+                                    <div class="dato"><span>EJE:</span> <span t-esc="record.ojo_izquierdo_eje.value or '--'"/></div>
+                                    <div class="dato"><span>AV:</span> <span t-esc="record.ojo_izquierdo_av.value or '--'"/></div>
+                                </div>
+                            </div>
+                            
+                            <!-- INFO ADICIONAL -->
+                            <div class="info-adicional">
+                                <div class="info-item"><span>👨‍⚕️ Profesional:</span> <span t-esc="record.profesional.value or 'No especificado'"/></div>
+                                <div class="info-item"><span>🔍 Diagnóstico:</span> <span t-esc="record.diagnostico.value or 'No especificado'"/></div>
+                                <div class="info-item"><span>👓 Tipo Lente:</span> <span t-esc="record.tipo_lente.value or 'No especificado'"/></div>
+                            </div>
+                        </div>
+                        
+                        <!-- FOOTER SIMPLE SIN BOTÓN -->
+                        <div class="kanban-footer-flow">
+                            <div class="click-hint">👆 Haz click para ver detalles</div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+       	               
+              
+  <!-- Vista tipo árbol para optica.graduacion -->
+  <record id="view_graduacion_tree" model="ir.ui.view">
+    <field name="name">optica.graduacion.tree</field>
+    <field name="model">optica.graduacion</field>
+    <field name="arch" type="xml">
+      <tree string="Graduaciones">
+        <field name="paciente_id"/>
+        <field name="ojo_derecho_esfera"/>
+        <field name="ojo_derecho_cilindro"/>
+        <field name="ojo_derecho_eje"/>
+        <field name="ojo_izquierdo_esfera"/>
+        <field name="ojo_izquierdo_cilindro"/>
+        <field name="ojo_izquierdo_eje"/>
+      </tree>
+    </field>
+  </record>
+
+  <!-- Actualizar la acción para incluir Kanban (REEMPLAZAR la existente) -->
+  <record id="action_graduacion" model="ir.actions.act_window">
+    <field name="name">Graduaciones</field>
+    <field name="res_model">optica.graduacion</field>
+    <field name="view_mode">kanban,tree,form</field>  <!-- Agregar kanban -->
+  </record>
+
+  <menuitem id="menu_optica_root" name="Óptica" sequence="10"/>
+  <menuitem id="menu_graduaciones" name="Graduaciones"
+            parent="menu_optica_root" action="action_graduacion" sequence="20"/>
+		
+  <!-- Pestaña en Contactos: abre SIEMPRE este form -->
+  <record id="view_res_partner_form_inherit_graduaciones" model="ir.ui.view">
+    <field name="name">res.partner.form.inherit.graduaciones</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook" position="inside">
+        <page string="Graduaciones">
+          <field name="graduacion_ids"
+                 context="{'default_paciente_id': active_id,
+                           'form_view_ref': 'odoo_graduacion_paciente.view_graduacion_form'}">
+            <tree string="Graduaciones" decoration-muted="not fecha">
+              <field name="fecha"/>
+              <field name="ojo_derecho_esfera"/>
+              <field name="ojo_derecho_cilindro"/>
+              <field name="ojo_derecho_eje"/>
+              <field name="ojo_izquierdo_esfera"/>
+              <field name="ojo_izquierdo_cilindro"/>
+              <field name="ojo_izquierdo_eje"/>
+            </tree>
+          </field>
+        </page>
+      </xpath>
+    </field>
+  </record>
+</odoo>
