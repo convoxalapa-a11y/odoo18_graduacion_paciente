@@ -6,6 +6,7 @@ class GraduacionPaciente(models.Model):
     _description = 'Graduación de Paciente'
     _rec_name = 'paciente_id'
     _order = 'fecha desc, id desc'
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
 
     paciente_id = fields.Many2one(
         'res.partner',
@@ -18,7 +19,7 @@ class GraduacionPaciente(models.Model):
     fecha = fields.Date(string='Fecha de evaluación', default=fields.Date.context_today)
     profesional = fields.Many2one('res.users', string='Optometrista', default=lambda self: self.env.user)
 
-    # ✅ CAMPOS EXISTENTES
+    # ✅ CAMPOS DE GRADUACIÓN
     ojo_derecho_esfera = fields.Float(string='OD Esfera', digits=(8, 2))
     ojo_derecho_cilindro = fields.Float(string='OD Cilindro', digits=(8, 2))
     ojo_derecho_eje = fields.Integer(string='OD Eje')
@@ -53,7 +54,7 @@ class GraduacionPaciente(models.Model):
 
     observaciones = fields.Text(string='Observaciones')
 
-    # ✅ NUEVOS CAMPOS CALCULADOS PARA DIAGNÓSTICO AUTOMÁTICO
+    # ✅ CAMPOS CALCULADOS PARA DIAGNÓSTICO AUTOMÁTICO
     diagnostico_od_detallado = fields.Char(
         string='Diagnóstico OD Detallado', 
         compute='_compute_diagnostico_automatico',
@@ -74,6 +75,18 @@ class GraduacionPaciente(models.Model):
         compute='_compute_diagnostico_automatico',
         store=True
     )
+    formacion_focos_od = fields.Char(
+        string='Formación Focos OD', 
+        compute='_compute_diagnostico_automatico',
+        store=True
+    )
+    formacion_focos_oi = fields.Char(
+        string='Formación Focos OI', 
+        compute='_compute_diagnostico_automatico',
+        store=True
+    )
+
+    # ✅ CAMPOS PARA SERIES RECOMENDADAS
     serie_recomendada_od = fields.Char(
         string='Serie OD', 
         compute='_compute_series_automaticas',
@@ -81,11 +94,6 @@ class GraduacionPaciente(models.Model):
     )
     serie_recomendada_oi = fields.Char(
         string='Serie OI', 
-        compute='_compute_series_automaticas',
-        store=True
-    )
-    serie_recomendada_general = fields.Char(
-        string='Serie Recomendada', 
         compute='_compute_series_automaticas',
         store=True
     )
@@ -146,6 +154,7 @@ class GraduacionPaciente(models.Model):
             )
             record.diagnostico_od_detallado = diag_od['mensaje']
             record.orientacion_od = diag_od['orientacion']
+            record.formacion_focos_od = diag_od['formacion_focos']
             
             # Diagnóstico OI
             diag_oi = record._analizar_astigmatismo_ojo(
@@ -153,6 +162,7 @@ class GraduacionPaciente(models.Model):
             )
             record.diagnostico_oi_detallado = diag_oi['mensaje']
             record.orientacion_oi = diag_oi['orientacion']
+            record.formacion_focos_oi = diag_oi['formacion_focos']
 
     # ✅ SERIES AUTOMÁTICAS
     @api.depends('ojo_derecho_esfera', 'ojo_derecho_cilindro', 'adicion',
@@ -171,9 +181,6 @@ class GraduacionPaciente(models.Model):
                 record.ojo_izquierdo_esfera, record.ojo_izquierdo_cilindro, record.adicion
             )
             record.serie_recomendada_oi = serie_oi
-            
-            # Serie general (la más alta de las dos)
-            record.serie_recomendada_general = record._obtener_serie_mas_alta(serie_od, serie_oi)
 
     # ✅ TRANSPOSICIÓN AUTOMÁTICA
     @api.depends('ojo_derecho_esfera', 'ojo_derecho_cilindro', 'ojo_derecho_eje',
@@ -209,9 +216,9 @@ class GraduacionPaciente(models.Model):
         return {
             'tipo': diagnostico['tipo'],
             'subtipo': diagnostico['subtipo'],
+            'formacion_focos': diagnostico['formacion_focos'],
             'orientacion': orientacion,
-            'descripcion': diagnostico['descripcion'],
-            'mensaje': f"{diagnostico['tipo']} - {diagnostico['descripcion']}",
+            'mensaje': f"{diagnostico['tipo']} ({diagnostico['subtipo']})",
             'esfera': esfera,
             'cilindro': cilindro,
             'eje': eje
@@ -228,7 +235,7 @@ class GraduacionPaciente(models.Model):
             return {
                 'tipo': 'Astigmatismo Hipermetrópico Simple',
                 'subtipo': 'AHS',
-                'descripcion': self._descripcion_ahs(esfera, cilindro)
+                'formacion_focos': 'Un foco en retina, otro detrás de retina'
             }
         
         # ASTIGMATISMO MIÓPICO SIMPLE (AMS)
@@ -237,7 +244,7 @@ class GraduacionPaciente(models.Model):
             return {
                 'tipo': 'Astigmatismo Miópico Simple',
                 'subtipo': 'AMS', 
-                'descripcion': self._descripcion_ams(esfera, cilindro)
+                'formacion_focos': 'Un foco en retina, otro delante de retina'
             }
         
         # ASTIGMATISMO HIPERMETRÓPICO COMPUESTO (AHC)
@@ -248,7 +255,7 @@ class GraduacionPaciente(models.Model):
             return {
                 'tipo': 'Astigmatismo Hipermetrópico Compuesto',
                 'subtipo': 'AHC',
-                'descripcion': self._descripcion_ahc(esfera, cilindro)
+                'formacion_focos': 'Ambos focos detrás de retina'
             }
         
         # ASTIGMATISMO MIÓPICO COMPUESTO (AMC)
@@ -259,7 +266,7 @@ class GraduacionPaciente(models.Model):
             return {
                 'tipo': 'Astigmatismo Miópico Compuesto',
                 'subtipo': 'AMC',
-                'descripcion': self._descripcion_amc(esfera, cilindro)
+                'formacion_focos': 'Ambos focos delante de retina'
             }
         
         # ASTIGMATISMO MIXTO (AM)
@@ -268,58 +275,33 @@ class GraduacionPaciente(models.Model):
             return {
                 'tipo': 'Astigmatismo Mixto',
                 'subtipo': 'AM',
-                'descripcion': self._descripcion_mixto(esfera, cilindro)
+                'formacion_focos': 'Un foco delante y otro detrás de retina'
             }
         
         return {
             'tipo': 'Astigmatismo',
             'subtipo': 'Indeterminado',
-            'descripcion': f'Esf: {esfera} Cil: {cilindro}'
+            'formacion_focos': 'Formación de focos no determinada'
         }
-
-    def _descripcion_ahs(self, esfera, cilindro):
-        if esfera == 0 and cilindro > 0:
-            return "Esfera neutra con cilindro positivo"
-        return "Esfera positiva con cilindro negativo del mismo valor"
-
-    def _descripcion_ams(self, esfera, cilindro):
-        if esfera == 0 and cilindro < 0:
-            return "Esfera neutra con cilindro negativo"
-        return "Esfera negativa con cilindro positivo del mismo valor"
-
-    def _descripcion_ahc(self, esfera, cilindro):
-        if cilindro > 0:
-            return "Esfera positiva con cilindro positivo de cualquier valor"
-        else:
-            return "Esfera positiva con cilindro negativo de menor valor"
-
-    def _descripcion_amc(self, esfera, cilindro):
-        if cilindro < 0:
-            return "Esfera negativa con cilindro negativo de cualquier valor"
-        else:
-            return "Esfera negativa con cilindro positivo de menor valor"
-
-    def _descripcion_mixto(self, esfera, cilindro):
-        if esfera > 0 and cilindro < 0:
-            return "Hipermetropía de menor valor que el cilindro negativo"
-        else:
-            return "Miopía de menor valor que el cilindro positivo"
 
     def _diagnosticar_esferico(self, esfera, lado):
         if esfera == 0:
             return {
                 'mensaje': "Emétrope (0.00)",
-                'orientacion': 'N/A'
+                'orientacion': 'N/A',
+                'formacion_focos': 'N/A'
             }
         elif esfera > 0:
             return {
                 'mensaje': f"Hipermetropía Simple {esfera:.2f}D",
-                'orientacion': 'N/A'
+                'orientacion': 'N/A',
+                'formacion_focos': 'Foco detrás de retina'
             }
         else:
             return {
                 'mensaje': f"Miopía Simple {abs(esfera):.2f}D", 
-                'orientacion': 'N/A'
+                'orientacion': 'N/A',
+                'formacion_focos': 'Foco delante de retina'
             }
 
     def _determinar_orientacion_eje(self, eje):
@@ -340,10 +322,6 @@ class GraduacionPaciente(models.Model):
         return (rangos['esfera']['min'] <= esfera <= rangos['esfera']['max'] and
                 abs(cilindro) <= abs(rangos['cilindro']['max']) and
                 rangos['adicion']['min'] <= adicion <= rangos['adicion']['max'])
-
-    def _obtener_serie_mas_alta(self, serie_od, serie_oi):
-        prioridad = {'RX1': 1, 'RX2': 2, 'RX3': 3}
-        return serie_od if prioridad[serie_od] >= prioridad[serie_oi] else serie_oi
 
     def _transponer_ojo(self, esfera, cilindro, eje):
         nueva_esfera = esfera + cilindro
