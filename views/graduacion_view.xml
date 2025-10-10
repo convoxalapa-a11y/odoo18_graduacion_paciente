@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+  <!-- FORM de optica.graduacion -->
   <record id="view_graduacion_form" model="ir.ui.view">
     <field name="name">optica.graduacion.form</field>
     <field name="model">optica.graduacion</field>
@@ -157,30 +159,81 @@
       </form>
     </field>
   </record>
-  
-  <!-- El resto de tu XML se mantiene IGUAL (Kanban, Tree, etc.) -->                                 
 
-  <!-- Vista Kanban (EXISTENTE - NO CAMBIAR) -->
+  <!-- Vista Kanban -->
   <record id="view_graduacion_kanban" model="ir.ui.view">
-    <!-- ... contenido existente se mantiene igual ... -->
+    <field name="name">optica.graduacion.kanban</field>
+    <field name="model">optica.graduacion</field>
+    <field name="arch" type="xml">
+      <kanban>
+        <field name="id"/>
+        <templates>
+          <t t-name="kanban-box">
+            <div class="oe_kanban_global_click">
+              <div class="o_kanban_record_title">
+                <field name="paciente_id"/>
+              </div>
+              <div>
+                <field name="fecha"/>
+              </div>
+            </div>
+          </t>
+        </templates>
+      </kanban>
+    </field>
   </record>
               
-  <!-- Vista tipo árbol (EXISTENTE - NO CAMBIAR) -->
+  <!-- Vista tipo árbol -->
   <record id="view_graduacion_tree" model="ir.ui.view">
-    <!-- ... contenido existente se mantiene igual ... -->
+    <field name="name">optica.graduacion.tree</field>
+    <field name="model">optica.graduacion</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="paciente_id"/>
+        <field name="fecha"/>
+        <field name="diagnostico"/>
+        <field name="ojo_derecho_esfera"/>
+        <field name="ojo_izquierdo_esfera"/>
+      </tree>
+    </field>
   </record>
 
-  <!-- Acción y menús (EXISTENTE - NO CAMBIAR) -->
+  <!-- Acción -->
   <record id="action_graduacion" model="ir.actions.act_window">
-    <!-- ... contenido existente se mantiene igual ... -->
+    <field name="name">Graduaciones</field>
+    <field name="res_model">optica.graduacion</field>
+    <field name="view_mode">tree,form,kanban</field>
+    <field name="view_id" ref="view_graduacion_tree"/>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Crea tu primera graduación de paciente
+      </p>
+    </field>
   </record>
 
   <menuitem id="menu_optica_root" name="Óptica" sequence="10"/>
   <menuitem id="menu_graduaciones" name="Graduaciones"
             parent="menu_optica_root" action="action_graduacion" sequence="20"/>
 		
-  <!-- Pestaña en Contactos (EXISTENTE - NO CAMBIAR) -->
+  <!-- Pestaña en Contactos -->
   <record id="view_res_partner_form_inherit_graduaciones" model="ir.ui.view">
-    <!-- ... contenido existente se mantiene igual ... -->
+    <field name="name">res.partner.form.inherit.graduaciones</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//page[@name='internal_notes']" position="after">
+        <page string="Historial Óptico">
+          <field name="graduacion_ids">
+            <tree>
+              <field name="fecha"/>
+              <field name="diagnostico"/>
+              <field name="ojo_derecho_esfera"/>
+              <field name="ojo_izquierdo_esfera"/>
+              <field name="adicion"/>
+            </tree>
+          </field>
+        </page>
+      </xpath>
+    </field>
   </record>
 </odoo>
