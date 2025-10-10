@@ -69,12 +69,13 @@
                 </group>
               </group>
 
-              <!-- Observaciones -->
-              <group>
-                <field name="observaciones" string="Observaciones y Recomendaciones" nolabel="1" class="graduacion-field"/>
+              <!-- Observaciones - CORREGIDO CON COLSPAN -->
+              <group colspan="2">
+                  <field name="observaciones" string="Observaciones y Recomendaciones" nolabel="1" 
+                  class="graduacion-field"
+                  style="min-height: 120px; width: 100%;"/>
               </group>
-            </page>
-
+            
             <!-- PESTAÑA 2: DIAGNÓSTICO AUTOMÁTICO -->
             <page string="Diagnóstico Automático">
               
