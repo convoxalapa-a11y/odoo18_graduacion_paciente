@@ -446,3 +446,31 @@ div.o_notebook {
     overflow-x: visible !important;
     overflow-y: auto !important;
 }
+
+/* ===== ESTILOS PARA CAMPO DE OBSERVACIONES ===== */
+/* Forzar que el campo de observaciones ocupe el 100% del ancho */
+field[name="observaciones"] {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+/* Estilo específico para textarea */
+textarea[name="observaciones"] {
+    width: 100% !important;
+    min-width: 100% !important;
+    max-width: 100% !important;
+    resize: vertical !important;
+}
+
+/* Asegurar que el grupo con colspan se expanda completamente */
+group[colspan="2"] {
+    width: 100% !important;
+}
+
+group[colspan="2"] field[name="observaciones"] {
+    width: 100% !important;
+    min-height: 120px !important;
+}
