@@ -65,12 +65,8 @@
                   <field name="distancia_nasopupilar_od" string="DNP OD" class="graduacion-field"/>
                   <field name="distancia_interpupilar" string="DIP" class="graduacion-field"/>
                   <field name="distancia_nasopupilar_oi" string="DNP OI" class="graduacion-field"/>
+                  <field name="altura_centro_optico" string="Altura Centro Óptico" class="graduacion-field"/>
                 </group>
-              </group>
-
-              <!-- Altura Centro Óptico -->
-              <group>
-                <field name="altura_centro_optico" string="Altura Centro Óptico" class="graduacion-field"/>
               </group>
 
               <!-- Observaciones -->
@@ -113,12 +109,12 @@
               <group string="Series (Para Laboratorio)">
                 <group>
                   <group string="Serie OD">
-                    <div class="o_form_label">Para laboratorio - Ojo Derecho</div>
+                    <div class="o_form_label">Serie - Ojo Derecho</div>
                     <field name="serie_recomendada_od" readonly="1" nolabel="1"/>
                   </group>
                   
                   <group string="Serie OI">
-                    <div class="o_form_label">Para laboratorio - Ojo Izquierdo</div>
+                    <div class="o_form_label">Serie - Ojo Izquierdo</div>
                     <field name="serie_recomendada_oi" readonly="1" nolabel="1"/>
                   </group>
                 </group>
