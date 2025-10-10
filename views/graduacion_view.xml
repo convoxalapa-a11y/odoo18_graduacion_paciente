@@ -86,24 +86,24 @@
               <group string="Diagnóstico de Astigmatismo">
                 <group>
                   <group string="Ojo Derecho">
-                    <label string="Tipo de Astigmatismo para" class="o_form_label"/>
+                    <div class="o_form_label">Tipo de Astigmatismo</div>
                     <field name="diagnostico_od_detallado" readonly="1" nolabel="1"/>
                     
-                    <label string="Formación de Focos para" class="o_form_label"/>
+                    <div class="o_form_label">Formación de Focos</div>
                     <field name="formacion_focos_od" readonly="1" nolabel="1"/>
                     
-                    <label string="Orientación del Eje para" class="o_form_label"/>
+                    <div class="o_form_label">Orientación del Eje</div>
                     <field name="orientacion_od" readonly="1" nolabel="1"/>
                   </group>
                   
                   <group string="Ojo Izquierdo">
-                    <label string="Tipo de Astigmatismo para" class="o_form_label"/>
+                    <div class="o_form_label">Tipo de Astigmatismo</div>
                     <field name="diagnostico_oi_detallado" readonly="1" nolabel="1"/>
                     
-                    <label string="Formación de Focos para" class="o_form_label"/>
+                    <div class="o_form_label">Formación de Focos</div>
                     <field name="formacion_focos_oi" readonly="1" nolabel="1"/>
                     
-                    <label string="Orientación del Eje para" class="o_form_label"/>
+                    <div class="o_form_label">Orientación del Eje</div>
                     <field name="orientacion_oi" readonly="1" nolabel="1"/>
                   </group>
                 </group>
