@@ -6,7 +6,7 @@ class GraduacionPaciente(models.Model):
     _description = 'Graduación de Paciente'
     _rec_name = 'paciente_id'
     _order = 'fecha desc, id desc'
-    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     paciente_id = fields.Many2one(
         'res.partner',
