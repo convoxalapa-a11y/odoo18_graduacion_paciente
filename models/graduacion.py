@@ -350,7 +350,7 @@ class GraduacionPaciente(models.Model):
         <b>🎯 Cálculo de Distancia al Vértice (12mm)</b><br/><br/>
         <b>OD:</b> {vertex_od['mensaje']}<br/>
         <b>OI:</b> {vertex_oi['mensaje']}<br/><br/>
-        <i>Nota: Para cilindros mayores a 4.00D consultar con especialista.</i>
+        <i>Nota: Para cilindros mayores a 4.00D se rcomienda RGP.</i>
         """
         
         return {
