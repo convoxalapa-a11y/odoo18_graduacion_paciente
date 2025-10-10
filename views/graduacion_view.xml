@@ -157,7 +157,6 @@
       </form>
     </field>
   </record>
-</odoo>
   
   <!-- El resto de tu XML se mantiene IGUAL (Kanban, Tree, etc.) -->                                 
 
