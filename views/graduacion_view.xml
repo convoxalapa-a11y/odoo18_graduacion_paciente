@@ -77,71 +77,71 @@
                     style="min-height: 120px; width: 100%;"/>
               </group>
              </page> 
-            
-            
+
             <!-- PESTAÑA 2: DIAGNÓSTICO AUTOMÁTICO -->
             <page string="Diagnóstico Automático">
-              
-              <!-- DIAGNÓSTICO DETALLADO POR OJO -->
-              <group string="Diagnóstico de Astigmatismo">
-                <group>
-                  <group string="Ojo Derecho">
-                    <div class="o_form_label">Tipo de Astigmatismo</div>
-                    <field name="diagnostico_od_detallado" readonly="1" nolabel="1"/>
-                    
-                    <div class="o_form_label">Formación de Focos</div>
-                    <field name="formacion_focos_od" readonly="1" nolabel="1"/>
-                    
-                    <div class="o_form_label">Orientación del Eje</div>
-                    <field name="orientacion_od" readonly="1" nolabel="1"/>
-                  </group>
-                  
-                  <group string="Ojo Izquierdo">
-                    <div class="o_form_label">Tipo de Astigmatismo</div>
-                    <field name="diagnostico_oi_detallado" readonly="1" nolabel="1"/>
-                    
-                    <div class="o_form_label">Formación de Focos</div>
-                    <field name="formacion_focos_oi" readonly="1" nolabel="1"/>
-                    
-                    <div class="o_form_label">Orientación del Eje</div>
-                    <field name="orientacion_oi" readonly="1" nolabel="1"/>
-                  </group>
+                
+                <!-- DIAGNÓSTICO DETALLADO POR OJO -->
+                <group string="Diagnóstico de Astigmatismo" colspan="2">
+                    <group>
+                        <group string="Ojo Derecho">
+                            <div class="o_form_label">Tipo de Astigmatismo</div>
+                            <field name="diagnostico_od_detallado" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                            
+                            <div class="o_form_label">Formación de Focos</div>
+                            <field name="formacion_focos_od" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                            
+                            <div class="o_form_label">Orientación del Eje</div>
+                            <field name="orientacion_od" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                        </group>
+                        
+                        <group string="Ojo Izquierdo">
+                            <div class="o_form_label">Tipo de Astigmatismo</div>
+                            <field name="diagnostico_oi_detallado" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                            
+                            <div class="o_form_label">Formación de Focos</div>
+                            <field name="formacion_focos_oi" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                            
+                            <div class="o_form_label">Orientación del Eje</div>
+                            <field name="orientacion_oi" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                        </group>
+                    </group>
                 </group>
-              </group>
-
-              <!-- SERIES PARA LABORATORIO - SOLO OD Y OI -->
-              <group string="Series (Para Laboratorio)">
-                <group>
-                  <group string="Serie OD">
-                    <div class="o_form_label">Serie - Ojo Derecho</div>
-                    <field name="serie_recomendada_od" readonly="1" nolabel="1"/>
-                  </group>
-                  
-                  <group string="Serie OI">
-                    <div class="o_form_label">Serie - Ojo Izquierdo</div>
-                    <field name="serie_recomendada_oi" readonly="1" nolabel="1"/>
-                  </group>
+            
+                <!-- SERIES PARA LABORATORIO -->
+                <group string="Series (Para Laboratorio)" colspan="2">
+                    <group>
+                        <group string="Serie OD">
+                            <div class="o_form_label">Para laboratorio - Ojo Derecho</div>
+                            <field name="serie_recomendada_od" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                        </group>
+                        
+                        <group string="Serie OI">
+                            <div class="o_form_label">Para laboratorio - Ojo Izquierdo</div>
+                            <field name="serie_recomendada_oi" readonly="1" nolabel="1" style="width: 100%; min-height: 40px;"/>
+                        </group>
+                    </group>
                 </group>
-              </group>
-
-              <!-- TRANSPOSICIÓN -->
-              <group string="Transposición de Lentes">
-                <group>
-                  <group string="OD Transpuesto">
-                    <field name="od_esfera_trans" string="ESF" readonly="1" class="graduacion-field"/>
-                    <field name="od_cilindro_trans" string="CIL" readonly="1" class="graduacion-field"/>
-                    <field name="od_eje_trans" string="EJE" readonly="1" class="graduacion-field"/>
-                  </group>
-                  <group string="OI Transpuesto">
-                    <field name="oi_esfera_trans" string="ESF" readonly="1" class="graduacion-field"/>
-                    <field name="oi_cilindro_trans" string="CIL" readonly="1" class="graduacion-field"/>
-                    <field name="oi_eje_trans" string="EJE" readonly="1" class="graduacion-field"/>
-                  </group>
+            
+                <!-- TRANSPOSICIÓN -->
+                <group string="Transposición de Lentes" colspan="2">
+                    <group>
+                        <group string="OD Transpuesto">
+                            <field name="od_esfera_trans" string="ESF" readonly="1" class="graduacion-field" style="width: 100%;"/>
+                            <field name="od_cilindro_trans" string="CIL" readonly="1" class="graduacion-field" style="width: 100%;"/>
+                            <field name="od_eje_trans" string="EJE" readonly="1" class="graduacion-field" style="width: 100%;"/>
+                        </group>
+                        
+                        <group string="OI Transpuesto">
+                            <field name="oi_esfera_trans" string="ESF" readonly="1" class="graduacion-field" style="width: 100%;"/>
+                            <field name="oi_cilindro_trans" string="CIL" readonly="1" class="graduacion-field" style="width: 100%;"/>
+                            <field name="oi_eje_trans" string="EJE" readonly="1" class="graduacion-field" style="width: 100%;"/>
+                        </group>
+                    </group>
                 </group>
-              </group>
-
+            
             </page>
-
+            
           </notebook>
         </sheet>
       </form>
