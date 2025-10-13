@@ -474,3 +474,51 @@ group[colspan="2"] field[name="observaciones"] {
     width: 100% !important;
     min-height: 120px !important;
 }
+
+/* ===== ESTILOS PARA PESTAÑA DIAGNÓSTICO AUTOMÁTICO ===== */
+/* Campos de diagnóstico automático */
+page[string="Diagnóstico Automático"] group[colspan="2"] {
+    width: 100% !important;
+    display: block !important;
+}
+
+page[string="Diagnóstico Automático"] field[readonly="1"] {
+    width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 4px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 8px !important;
+}
+
+/* Estilos específicos para los div de labels */
+page[string="Diagnóstico Automático"] .o_form_label {
+    font-weight: 600 !important;
+    color: #495057 !important;
+    margin-bottom: 4px !important;
+    display: block !important;
+}
+
+/* Grupos internos en dos columnas */
+page[string="Diagnóstico Automático"] group > group {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+}
+
+page[string="Diagnóstico Automático"] group > group > group {
+    flex: 1 1 48% !important;
+    margin: 0 1% 16px 1% !important;
+    min-width: 300px !important;
+}
+
+/* Asegurar que los grupos internos tengan buen espaciado */
+page[string="Diagnóstico Automático"] group > group > group[string] {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 8px !important;
+    padding: 16px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
