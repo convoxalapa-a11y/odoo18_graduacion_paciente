@@ -8,3 +8,5 @@ XML para vistas
 
 Autor
 BellaKo85
+
+se actualizo para Odoo 18.0-20251014 (Versión Community) el original es para Odoo 17.0-20250630 (Versión Community)
