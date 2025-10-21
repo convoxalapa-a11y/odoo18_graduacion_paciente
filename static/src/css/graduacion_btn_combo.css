@@ -1,5 +1,5 @@
-/* ===== BOTONES PRINCIPALES ===== */
-/* Botón Imprimir Historia Clínica */
+
+/* ===== BOTONES PRINCIPALES - ODOO 18 COMPATIBLE ===== */
 .mi-btn {
   border: none;
   color: white;
@@ -13,12 +13,11 @@
   background: linear-gradient(135deg, #dbdbdb 0%, #7c3aed 100%);
   box-shadow: 0 8px 20px rgba(37,99,235,0.12);
   transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
-  -webkit-appearance: none;
 }
 
-/* Botón Nuevo en vista lista (Odoo 17) */
-button.o_list_add,
-.o_control_panel .btn-primary:not(.dropdown-toggle) {
+/* Botón Crear en Odoo 18 */
+button.o_list_button_add,
+.btn-primary:not(.dropdown-toggle) {
   border: none !important;
   color: white !important;
   padding: 12px 18px !important;
@@ -33,46 +32,38 @@ button.o_list_add,
   transition: all 0.12s ease !important;
 }
 
-/* ===== EFECTOS HOVER/FOCUS PARA BOTONES ===== */
-.mi-btn.shadow-effect:hover,
-.mi-btn.shadow-effect:focus,
-button.o_list_add:hover,
-button.o_list_add:focus,
-.o_control_panel .btn-primary:not(.dropdown-toggle):hover,
-.o_control_panel .btn-primary:not(.dropdown-toggle):focus {
+/* EFECTOS HOVER */
+.mi-btn:hover,
+.mi-btn:focus,
+button.o_list_button_add:hover,
+button.o_list_button_add:focus,
+.btn-primary:not(.dropdown-toggle):hover,
+.btn-primary:not(.dropdown-toggle):focus {
   transform: translateY(-3px) !important;
   box-shadow: 0px 14px 32px rgba(0, 0, 0, 0.22) !important;
   filter: brightness(1.03) !important;
   outline: none !important;
 }
 
-.mi-btn.shadow-effect:focus,
-button.o_list_add:focus,
-.o_control_panel .btn-primary:not(.dropdown-toggle):focus {
-  box-shadow: 0 0 0 4px rgba(124,58,237,0.12), 0px 14px 32px rgba(0,0,0,0.22) !important;
-}
-
-/* ===== KANBAN FLOW VIOLENTO SIN BOTÓN ===== */
+/* KANBAN STYLES */
 .kanban-flow-violento {
     min-height: 150px !important;
     border: none !important;
     border-radius: 18px !important;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15) !important;
     transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
-    background: linear-gradient(135deg, #b8bac2  0%, #f8fafc 100%) !important;
+    background: linear-gradient(135deg, #b8bac2 0%, #f8fafc 100%) !important;
     overflow: hidden !important;
     margin-bottom: 12px !important;
     cursor: pointer !important;
 }
 
-/* EFECTO HOVER EXPLOSIVO */
 .kanban-flow-violento:hover {
     transform: translateY(-10px) scale(1.04) !important;
     box-shadow: 0 30px 60px rgba(37, 99, 235, 0.35) !important;
     border: 3px solid #2563eb !important;
 }
 
-/* FOOTER SIMPLE */
 .kanban-footer-flow {
     padding: 12px 20px !important;
     border-top: 1px solid #e2e8f0 !important;
@@ -91,28 +82,10 @@ button.o_list_add:focus,
     font-weight: 600 !important;
 }
 
-/* HEADER CON GRADIENTE ANIMADO */
 .kanban-header-flow {
     background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%) !important;
     color: white !important;
     padding: 20px !important;
-    position: relative !important;
-    overflow: hidden !important;
-}
-
-.kanban-header-flow::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.8s ease;
-}
-
-.kanban-flow-violento:hover .kanban-header-flow::before {
-    left: 100%;
 }
 
 .kanban-paciente {
@@ -126,7 +99,6 @@ button.o_list_add:focus,
     opacity: 0.9 !important;
 }
 
-/* CUERPO DE LA TARJETA */
 .kanban-body-flow {
     padding: 12px !important;
 }
@@ -180,7 +152,6 @@ button.o_list_add:focus,
     color: #4f46e5 !important;
 }
 
-/* ANIMACIÓN DE ENTRADA */
 @keyframes kanbanSlideIn {
     0% {
         opacity: 0;
@@ -212,19 +183,18 @@ button.o_list_add:focus,
     }
 }
 
-/* ===== MEJORAS RESPONSIVE ===== */
 @media (max-width: 420px) {
-  /* Botones responsive */
   .mi-btn { 
     padding: 10px 14px !important; 
     font-size: 14px !important; 
     border-radius: 10px !important; 
   }
   
-  button.o_list_add,
-  .o_control_panel .btn-primary:not(.dropdown-toggle) {
+  button.o_list_button_add,
+  .btn-primary:not(.dropdown-toggle) {
     padding: 10px 14px !important;
     font-size: 14px !important;
     border-radius: 10px !important;
   }
 }
+EOF
