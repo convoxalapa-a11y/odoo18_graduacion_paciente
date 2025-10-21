@@ -20,21 +20,21 @@ class GraduacionPaciente(models.Model):
     profesional = fields.Many2one('res.users', string='Optometrista', default=lambda self: self.env.user)
 
     # ✅ CAMPOS DE GRADUACIÓN
-    ojo_derecho_esfera = fields.Float(string='OD Esfera', digits=(8, 2))
-    ojo_derecho_cilindro = fields.Float(string='OD Cilindro', digits=(8, 2))
+    ojo_derecho_esfera = fields.Float(string='OD Esfera', digits=(6, 2))
+    ojo_derecho_cilindro = fields.Float(string='OD Cilindro', digits=(6, 2))
     ojo_derecho_eje = fields.Integer(string='OD Eje')
     ojo_derecho_av = fields.Char(string='OD AV')
 
-    ojo_izquierdo_esfera = fields.Float(string='OI Esfera', digits=(8, 2))
-    ojo_izquierdo_cilindro = fields.Float(string='OI Cilindro', digits=(8, 2))
+    ojo_izquierdo_esfera = fields.Float(string='OI Esfera', digits=(6, 2))
+    ojo_izquierdo_cilindro = fields.Float(string='OI Cilindro', digits=(6, 2))
     ojo_izquierdo_eje = fields.Integer(string='OI Eje')
     ojo_izquierdo_av = fields.Char(string='OI AV')
 
-    adicion = fields.Float(string='Adición', digits=(8, 2))
-    distancia_nasopupilar_od = fields.Float(string='Distancia Nasopupilar OD', digits=(8, 2))
-    distancia_nasopupilar_oi = fields.Float(string='Distancia Nasopupilar OI', digits=(8, 2))
-    distancia_interpupilar = fields.Float(string='Distancia Interpupilar', digits=(8, 2))
-    altura_centro_optico = fields.Float(string='Altura CO', digits=(8, 2))
+    adicion = fields.Float(string='Adición', digits=(6, 2))
+    distancia_nasopupilar_od = fields.Float(string='Distancia Nasopupilar OD', digits=(6, 2))
+    distancia_nasopupilar_oi = fields.Float(string='Distancia Nasopupilar OI', digits=(6, 2))
+    distancia_interpupilar = fields.Float(string='Distancia Interpupilar', digits=(6, 2))
+    altura_centro_optico = fields.Float(string='Altura CO', digits=(6, 2))
     
     tipo_lente = fields.Selection([
         ('monofocal', 'Monofocal'),
