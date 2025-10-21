@@ -229,10 +229,10 @@
 
   <!-- Vista tipo árbol para optica.graduacion -->
   <record id="view_graduacion_tree" model="ir.ui.view">
-    <field name="name">optica.graduacion.tree</field>
+    <field name="name">optica.graduacion.list</field>
     <field name="model">optica.graduacion</field>
     <field name="arch" type="xml">
-      <tree string="Graduaciones">
+      <list string="Graduaciones">
         <field name="paciente_id"/>
         <field name="ojo_derecho_esfera"/>
         <field name="ojo_derecho_cilindro"/>
@@ -240,7 +240,7 @@
         <field name="ojo_izquierdo_esfera"/>
         <field name="ojo_izquierdo_cilindro"/>
         <field name="ojo_izquierdo_eje"/>
-      </tree>
+      </list>
     </field>
   </record>
 
@@ -248,7 +248,7 @@
   <record id="action_graduacion" model="ir.actions.act_window">
     <field name="name">Graduaciones</field>
     <field name="res_model">optica.graduacion</field>
-    <field name="view_mode">kanban,tree,form</field>
+    <field name="view_mode">kanban,list,form</field>
   </record>
 
   <menuitem id="menu_optica_root" name="Óptica" sequence="10"/>
@@ -264,9 +264,8 @@
       <xpath expr="//notebook" position="inside">
         <page string="Graduaciones">
           <field name="graduacion_ids"
-                 context="{'default_paciente_id': active_id,
-                           'form_view_ref': 'odoo_graduacion_paciente.view_graduacion_form'}">
-            <tree string="Graduaciones" decoration-muted="not fecha">
+                 context="{'default_paciente_id': id}">
+            <list string="Graduaciones" decoration-muted="not fecha">
               <field name="fecha"/>
               <field name="ojo_derecho_esfera"/>
               <field name="ojo_derecho_cilindro"/>
@@ -274,7 +273,7 @@
               <field name="ojo_izquierdo_esfera"/>
               <field name="ojo_izquierdo_cilindro"/>
               <field name="ojo_izquierdo_eje"/>
-            </tree>
+            </list>
           </field>
         </page>
       </xpath>
