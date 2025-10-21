@@ -14,7 +14,7 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "odoo_graduacion_paciente/static/src/css/graduacion_btn_combo.css",
+            "odoo18_graduacion_paciente/static/src/css/graduacion_btn_combo.css",
         ],
     },
     "installable": True,
